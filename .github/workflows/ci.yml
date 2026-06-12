@@ -1,0 +1,42 @@
+name: Repository CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate static site repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for unresolved merge conflicts
+        run: |
+          if git grep -n -E '^(<<<<<<<|=======|>>>>>>>)' -- . ':!.git'; then
+            echo "Unresolved merge conflict markers found."
+            exit 1
+          fi
+
+      - name: Validate GitHub workflow YAML
+        run: |
+          ruby -e 'require "yaml"; (Dir[".github/workflows/*.yml"] + Dir[".github/*.yml"]).each { |file| YAML.load_file(file); puts "validated #{file}" }'
+
+      - name: Lint PHP syntax
+        run: |
+          php_files=$(find . -path ./.git -prune -o -name '*.php' -print)
+          if [ -z "$php_files" ]; then
+            echo "No PHP files found."
+            exit 0
+          fi
+          while IFS= read -r file; do
+            php -l "$file"
+          done <<< "$php_files"
