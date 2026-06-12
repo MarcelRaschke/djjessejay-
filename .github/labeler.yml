@@ -1,0 +1,25 @@
+github-actions:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**'
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+
+site-content:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.html'
+          - '**/*.htm'
+          - '**/*.php'
+          - '**/*.css'
+          - '**/*.js'
+          - '**/*.svg'
+
+data:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.sql'
+          - '**/*.xml'

@@ -1,0 +1,87 @@
+name: Git integration sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_repository:
+        description: 'Repository to push to, for example owner/repo.'
+        required: true
+        default: 'MarcelRaschke/actions'
+      target_branch:
+        description: 'Branch to update in the target repository.'
+        required: true
+        default: 'master'
+      source_ref:
+        description: 'Local ref to sync from this repository.'
+        required: true
+        default: 'HEAD'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: git-integration-${{ inputs.target_repository }}-${{ inputs.target_branch }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Fetch, integrate, and push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Add authenticated target remote
+        env:
+          TARGET_REPOSITORY: ${{ inputs.target_repository }}
+          SYNC_TOKEN: ${{ secrets.GIT_INTEGRATION_TOKEN }}
+        run: |
+          if [ -z "$SYNC_TOKEN" ]; then
+            echo "Missing GIT_INTEGRATION_TOKEN secret with write access to $TARGET_REPOSITORY."
+            exit 1
+          fi
+
+          git remote add target "https://x-access-token:${SYNC_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
+
+      - name: Fetch target branch before pushing
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+        run: |
+          git fetch target "+refs/heads/${TARGET_BRANCH}:refs/remotes/target/${TARGET_BRANCH}" || true
+
+      - name: Integrate target branch changes
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+          SOURCE_REF: ${{ inputs.source_ref }}
+        run: |
+          git checkout "$SOURCE_REF"
+
+          if git rev-parse --verify "refs/remotes/target/${TARGET_BRANCH}" >/dev/null 2>&1; then
+            git rebase "refs/remotes/target/${TARGET_BRANCH}"
+          else
+            echo "Target branch ${TARGET_BRANCH} does not exist yet; pushing source ref as a new branch."
+          fi
+
+      - name: Push integrated branch with fast-forward retry
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+        run: |
+          for attempt in 1 2 3; do
+            if git push target "HEAD:refs/heads/${TARGET_BRANCH}"; then
+              exit 0
+            fi
+
+            echo "Push attempt ${attempt} failed, fetching target branch before retry."
+            git fetch target "+refs/heads/${TARGET_BRANCH}:refs/remotes/target/${TARGET_BRANCH}"
+            git rebase "refs/remotes/target/${TARGET_BRANCH}"
+          done
+
+          echo "Unable to push after fetching and rebasing target branch."
+          exit 1
