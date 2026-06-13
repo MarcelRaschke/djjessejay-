@@ -7,3 +7,6 @@
 # djjessejay.ch
 djjessejay.ch
 @dependabot
+## M10-4 Import your data
+
+- [Notion · Obsidian · Paperclip Data Mythos](import-your-data.html)
