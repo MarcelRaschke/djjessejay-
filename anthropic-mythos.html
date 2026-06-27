@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M10-46 · Anthropic Mythos · IP Codex</title>
+  <meta name="description" content="Vibecoded Anthropic-Mythos für DJ Jesse Jay: KI als verantwortungsvoller Resonanzraum, IP-Codex und kreativer Prompt-Ritus.">
+  <style>
+    :root {
+      --ink: #19140f;
+      --muted: #6f6257;
+      --paper: rgba(255, 250, 240, 0.82);
+      --line: rgba(72, 54, 37, 0.16);
+      --clay: #c9794f;
+      --ember: #f2a15d;
+      --cream: #fff3da;
+      --violet: #6d5df7;
+      --night: #211712;
+      --shadow: 0 28px 90px rgba(71, 39, 18, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 16% 10%, rgba(255, 232, 190, 0.9), transparent 28rem),
+        radial-gradient(circle at 84% 20%, rgba(109, 93, 247, 0.28), transparent 26rem),
+        radial-gradient(circle at 55% 92%, rgba(242, 161, 93, 0.35), transparent 24rem),
+        linear-gradient(135deg, #f1d6ac 0%, #d89466 42%, #4d3024 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.72), transparent 78%);
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 34px 0 64px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 74px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .brand,
+    .pill,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand {
+      gap: 12px;
+      color: inherit;
+      font-weight: 820;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.44);
+      border-radius: 15px;
+      background: rgba(255,255,255,0.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.42);
+    }
+
+    .pill {
+      gap: 10px;
+      padding: 10px 15px;
+      border: 1px solid rgba(255,255,255,0.36);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.13);
+      backdrop-filter: blur(18px);
+      font-size: 14px;
+      font-weight: 720;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
+    }
+
+    .spark {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--cream);
+      box-shadow: 0 0 24px var(--cream);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.92);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      color: white;
+      font-size: clamp(3.3rem, 8.5vw, 7.2rem);
+      line-height: 0.89;
+      letter-spacing: -0.09em;
+      text-wrap: balance;
+    }
+
+    .lead {
+      max-width: 670px;
+      margin: 30px 0 0;
+      color: rgba(255,255,255,0.86);
+      font-size: clamp(1.06rem, 2vw, 1.34rem);
+      line-height: 1.66;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      color: var(--night);
+      background: var(--cream);
+      font-weight: 850;
+      box-shadow: 0 18px 45px rgba(49, 27, 16, 0.25);
+    }
+
+    .button.secondary {
+      color: white;
+      border: 1px solid rgba(255,255,255,0.42);
+      background: rgba(255,255,255,0.13);
+      backdrop-filter: blur(14px);
+    }
+
+    .myth-card {
+      position: relative;
+      min-height: 540px;
+      border: 1px solid rgba(255,255,255,0.42);
+      border-radius: 42px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.58), rgba(255,255,255,0.14));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(24px);
+    }
+
+    .myth-card::before,
+    .myth-card::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.38);
+      border-radius: 999px;
+    }
+
+    .myth-card::before {
+      inset: 48px 34px;
+      transform: rotate(-12deg);
+    }
+
+    .myth-card::after {
+      inset: 86px 68px;
+      transform: rotate(18deg);
+    }
+
+    .totem {
+      position: absolute;
+      inset: 50%;
+      display: grid;
+      place-items: center;
+      width: 146px;
+      height: 146px;
+      margin: -73px;
+      border-radius: 42px;
+      color: white;
+      background: rgba(33, 23, 18, 0.24);
+      border: 1px solid rgba(255,255,255,0.54);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.48), 0 24px 70px rgba(49, 20, 12, 0.28);
+      font-size: 54px;
+      font-weight: 950;
+      z-index: 2;
+    }
+
+    .rune {
+      position: absolute;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      width: 120px;
+      height: 120px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.58);
+      border-radius: 34px;
+      color: white;
+      background: rgba(255,255,255,0.16);
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 18px 60px rgba(46, 25, 13, 0.18);
+    }
+
+    .rune span {
+      display: block;
+      margin-top: 7px;
+      color: rgba(255,255,255,0.78);
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .human { top: 54px; left: 72px; }
+    .model { top: 78px; right: 66px; }
+    .music { bottom: 70px; left: 54px; }
+    .care { right: 72px; bottom: 52px; }
+
+    .constellation {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 18px;
+      margin-top: 64px;
+    }
+
+    .panel {
+      min-height: 230px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--paper);
+      box-shadow: 0 18px 50px rgba(77, 48, 36, 0.14);
+      backdrop-filter: blur(20px);
+    }
+
+    .panel.wide { grid-column: span 3; }
+
+    .panel.tall { grid-row: span 2; }
+
+    .panel h2,
+    .panel h3 {
+      margin: 0 0 14px;
+      color: var(--night);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .panel h2 { font-size: clamp(2rem, 4vw, 3.6rem); }
+    .panel h3 { font-size: 1.55rem; }
+
+    .panel p,
+    .ritual-list {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .ritual-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ritual-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--clay), var(--violet));
+      box-shadow: 0 0 18px rgba(109, 93, 247, 0.4);
+    }
+
+    .footer-note {
+      margin: 42px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-weight: 720;
+      text-align: center;
+    }
+
+    .debug-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      list-style: none;
+    }
+
+    .debug-list code {
+      color: var(--night);
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .nav,
+      .hero { align-items: flex-start; }
+      .nav { flex-direction: column; margin-bottom: 48px; }
+      .hero { grid-template-columns: 1fr; }
+      .myth-card { min-height: 460px; }
+      .constellation { grid-template-columns: 1fr; }
+      .panel.wide { grid-column: auto; }
+      .rune { width: 104px; height: 104px; }
+      .human { left: 28px; }
+      .model { right: 28px; }
+      .music { left: 26px; }
+      .care { right: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="home.html" aria-label="Zurück zur DJ Jesse Jay Startseite">
+        <span class="brand-mark">✶</span>
+        <span>DJ Jesse Jay · Anthropic Mythos · IP Codex</span>
+      </a>
+      <span class="pill"><span class="spark"></span>M10-46 IP · vibecoded</span>
+    </nav>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow"><span class="spark"></span>Mensch · Modell · Mythos · IP · Verantwortung</div>
+        <h1 id="hero-title">Mythos für eine KI-Muse mit Gewissen.</h1>
+        <p class="lead">
+          Anthropic wird hier als verantwortungsvolle Studio-Muse erzählt: ein Resonanzraum, der Fragen hält, Ideen ordnet
+          und DJ Jesse Jays progressive Klangreisen in klare, respektvolle IP-Rituale übersetzt.
+        </p>
+        <div class="actions">
+          <a class="button" href="#ritual">Mythos öffnen</a>
+          <a class="button secondary" href="#ip">IP-Pfad lesen</a>
+        </div>
+      </div>
+
+      <div class="myth-card" aria-label="Anthropic mythos constellation visualization">
+        <div class="rune human">♡<span>Mensch</span></div>
+        <div class="rune model">AI<span>Claude</span></div>
+        <div class="totem">A</div>
+        <div class="rune music">♫<span>Musik</span></div>
+        <div class="rune care">⚖<span>Sorgfalt</span></div>
+      </div>
+    </section>
+
+    <section class="constellation" id="ritual" aria-label="Anthropic Mythos cards">
+      <article class="panel wide">
+        <h2>Die Muse antwortet nicht lauter, sondern verantwortlicher.</h2>
+        <p>
+          Dieser Mythos rahmt Anthropic als kreative Ordnungskraft: Prompts werden zu Partituren, Antworten zu
+          Skizzen, und jede Ausgabe bleibt ein Vorschlag, den menschliche Intuition final mischt, mastered und freigibt.
+        </p>
+      </article>
+
+      <article class="panel tall" id="ip">
+        <h3>IP-Codex</h3>
+        <ul class="ritual-list">
+          <li><span class="dot"></span>Eigene Stimme, Samples und DJ-Story behalten.</li>
+          <li><span class="dot"></span>Quellen, Inspiration und AI-Anteil transparent markieren.</li>
+          <li><span class="dot"></span>Keine fremden Lyrics, Marken oder geschützten Werke unklar übernehmen.</li>
+          <li><span class="dot"></span>Finale Freigabe menschlich kuratieren.</li>
+        </ul>
+      </article>
+
+      <article class="panel wide">
+        <h3>Vibe</h3>
+        <p>
+          Warme Clay-Farben, violette Denkfunken und ein stiller Grid-Horizont verbinden Clubnacht,
+          Studio-Notizbuch und verantwortungsvolle AI-Poesie.
+        </p>
+      </article>
+
+      <article class="panel">
+        <h3>Prompt-Ritus</h3>
+        <p>
+          Frag präzise, höre langsam, remixe mutig: Aus rohen Gedanken entsteht ein Set aus Text,
+          Struktur und Atmosphäre.
+        </p>
+      </article>
+
+      <article class="panel">
+        <h3>CF Worker</h3>
+        <p>
+          Der optionale Worker-Assistent liefert <code>GET /health</code> und <code>POST /assist</code> als
+          edge-freundlichen Mythos-Service ohne externe Runtime-Abhängigkeit.
+        </p>
+      </article>
+
+      <article class="panel wide">
+        <h3>Output</h3>
+        <p>
+          Eine eigenständige Landingpage für M10-46, die Anthropic-inspirierte Verantwortung mit DJ Jesse Jays
+          seelentragender Progressive-Energie verbindet und als IP-Marker im Repository sichtbar bleibt.
+        </p>
+      </article>
+
+      <article class="panel wide" id="debug">
+        <h3>Debug-Manifest</h3>
+        <ul class="debug-list">
+          <li><span class="dot"></span><code>scripts/smoke_m10_46.py</code> prüft README-Link, Kerntexte, Worker-Assistent und interne Anker.</li>
+          <li><span class="dot"></span>Die Seite bleibt statisch: keine externen Skripte, kein Tracking, keine Runtime-Abhängigkeit.</li>
+          <li><span class="dot"></span>Rebase/Squash-freundlich: M10-46 lebt als klarer, einzelner Feature-Slice.</li>
+        </ul>
+      </article>
+    </section>
+
+    <p class="footer-note">Vibecoded für M10-46 · Anthropic Mythos, IP-Codex und Zürcher Nachtlicht im selben Mix.</p>
+  </main>
+</body>
+</html>
