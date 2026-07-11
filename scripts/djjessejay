@@ -34,17 +34,21 @@ start() {
         return 1
     fi
 
-    start_daemon -p "$PHP_FPM_PID" "$PHP_FPM_BIN" --daemonize
-    start_daemon -p "$NGINX_PID"   "$NGINX_BIN"
-    log_end_msg $?
+    RC=0
+    start_daemon -p "$PHP_FPM_PID" "$PHP_FPM_BIN" --daemonize || RC=$?
+    start_daemon -p "$NGINX_PID"   "$NGINX_BIN"               || RC=$?
+    log_end_msg $RC
+    return $RC
 }
 
 stop() {
     log_daemon_msg "Stopping $DESC" "$NAME"
 
-    killproc -p "$NGINX_PID"   "$NGINX_BIN"   && true
-    killproc -p "$PHP_FPM_PID" "$PHP_FPM_BIN" && true
-    log_end_msg $?
+    RC=0
+    killproc -p "$NGINX_PID"   "$NGINX_BIN"   || RC=$?
+    killproc -p "$PHP_FPM_PID" "$PHP_FPM_BIN" || RC=$?
+    log_end_msg $RC
+    return $RC
 }
 
 reload() {
