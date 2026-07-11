@@ -36,7 +36,7 @@ start() {
 
     RC=0
     start_daemon -p "$PHP_FPM_PID" "$PHP_FPM_BIN" --daemonize || RC=$?
-    start_daemon -p "$NGINX_PID"   "$NGINX_BIN"               || RC=$?
+    start_daemon -p "$NGINX_PID"   "$NGINX_BIN"               || { [ $RC -eq 0 ] && RC=$?; }
     log_end_msg $RC
     return $RC
 }
@@ -46,7 +46,7 @@ stop() {
 
     RC=0
     killproc -p "$NGINX_PID"   "$NGINX_BIN"   || RC=$?
-    killproc -p "$PHP_FPM_PID" "$PHP_FPM_BIN" || RC=$?
+    killproc -p "$PHP_FPM_PID" "$PHP_FPM_BIN" || { [ $RC -eq 0 ] && RC=$?; }
     log_end_msg $RC
     return $RC
 }
