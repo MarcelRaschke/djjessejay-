@@ -1,0 +1,75 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          djjessejay
+# Required-Start:    $network $remote_fs $syslog mysql
+# Required-Stop:     $network $remote_fs $syslog mysql
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: DJ Jesse Jay web service
+# Description:       Starts and stops the nginx and PHP-FPM services
+#                    required for the djjessejay.ch website.
+### END INIT INFO
+
+set -e
+
+NAME="djjessejay"
+DESC="DJ Jesse Jay web service"
+
+NGINX_BIN="/usr/sbin/nginx"
+PHP_FPM_BIN="/usr/sbin/php-fpm8.2"
+NGINX_PID="/var/run/nginx.pid"
+PHP_FPM_PID="/var/run/php/php8.2-fpm.pid"
+
+. /lib/lsb/init-functions
+
+start() {
+    log_daemon_msg "Starting $DESC" "$NAME"
+
+    if [ ! -x "$NGINX_BIN" ]; then
+        log_failure_msg "nginx not found at $NGINX_BIN"
+        return 1
+    fi
+    if [ ! -x "$PHP_FPM_BIN" ]; then
+        log_failure_msg "php-fpm not found at $PHP_FPM_BIN"
+        return 1
+    fi
+
+    RC=0
+    start_daemon -p "$PHP_FPM_PID" "$PHP_FPM_BIN" --daemonize || RC=$?
+    start_daemon -p "$NGINX_PID"   "$NGINX_BIN"               || { [ $RC -eq 0 ] && RC=$?; }
+    log_end_msg $RC
+    return $RC
+}
+
+stop() {
+    log_daemon_msg "Stopping $DESC" "$NAME"
+
+    RC=0
+    killproc -p "$NGINX_PID"   "$NGINX_BIN"   || RC=$?
+    killproc -p "$PHP_FPM_PID" "$PHP_FPM_BIN" || { [ $RC -eq 0 ] && RC=$?; }
+    log_end_msg $RC
+    return $RC
+}
+
+reload() {
+    log_daemon_msg "Reloading $DESC configuration" "$NAME"
+    killproc -p "$NGINX_PID" "$NGINX_BIN" -HUP
+    log_end_msg $?
+}
+
+status() {
+    status_of_proc -p "$NGINX_PID"   "$NGINX_BIN"   "nginx"   || return $?
+    status_of_proc -p "$PHP_FPM_PID" "$PHP_FPM_BIN" "php-fpm" || return $?
+}
+
+case "$1" in
+    start)   start   ;;
+    stop)    stop    ;;
+    reload)  reload  ;;
+    restart) stop; sleep 1; start ;;
+    status)  status  ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|reload|status}" >&2
+        exit 3
+        ;;
+esac

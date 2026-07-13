@@ -40,3 +40,6 @@ jobs:
           while IFS= read -r file; do
             php -l "$file"
           done <<< "$php_files"
+
+      - name: Run M10-46 smoke checks
+        run: python3 scripts/smoke_m10_46.py
