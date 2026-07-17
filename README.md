@@ -10,3 +10,9 @@ djjessejay.ch
 
 - [Anthropic Mythos · IP Codex](anthropic-mythos.html)
 - [Cloudflare Worker Assistent](workers/anthropic-mythos-assistant.js)
+
+## M10-72 Recurring Anthropic Mythos
+
+- [Recurring Anthropic Mythos · IP Codex](recurring-anthropic-mythos.html)
+- [Recurring Cloudflare Worker Assistent](workers/recurring-anthropic-mythos-assistant.js)
+
