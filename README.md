@@ -16,3 +16,14 @@ djjessejay.ch
 - [Recurring Anthropic Mythos · IP Codex](recurring-anthropic-mythos.html)
 - [Recurring Cloudflare Worker Assistent](workers/recurring-anthropic-mythos-assistant.js)
 
+## Cloudflare Pages
+
+Der Workflow [`cloudflare-pages.yml`](.github/workflows/cloudflare-pages.yml) veröffentlicht
+den statischen Inhalt bei jedem Push auf `main` im Cloudflare-Pages-Projekt
+`djjessejay`. Er zeigt vor dem Deployment mit `git remote -v`, aus welchem
+Git-Repository der Build stammt.
+
+Für das Deployment müssen im GitHub-Repository die Actions-Secrets
+`CLOUDFLARE_API_TOKEN` (mit Pages-Schreibzugriff) und
+`CLOUDFLARE_ACCOUNT_ID` hinterlegt sein. Cloudflare Pages selbst ist kein
+Git-Remote; der Workflow lädt den ausgecheckten Stand mit Wrangler hoch.
