@@ -16,3 +16,8 @@ djjessejay.ch
 - [Recurring Anthropic Mythos · IP Codex](recurring-anthropic-mythos.html)
 - [Recurring Cloudflare Worker Assistent](workers/recurring-anthropic-mythos-assistant.js)
 
+
+## M10-86 Recurring Issuen · Anthropic Mythos
+
+- [Recurring Issuen · Anthropic Mythos · IP Codex](recurring-issuen-anthropic-mythos.html)
+- [Recurring Issuen Cloudflare Worker Assistent](workers/recurring-issuen-anthropic-mythos-assistant.js)
