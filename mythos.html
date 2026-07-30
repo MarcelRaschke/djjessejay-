@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Mythos-inspirierte Progressive-Music-Vision von DJ Jesse Jay aus Zürich."
+    />
+    <title>DJ Jesse Jay :: Mythos π</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f8f3e7;
+        --muted: #b7abc7;
+        --night: #090413;
+        --violet: #7f5cff;
+        --magenta: #ff4fd8;
+        --cyan: #4df5ff;
+        --amber: #ffd166;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(127, 92, 255, 0.42), transparent 28rem),
+          radial-gradient(circle at 85% 20%, rgba(255, 79, 216, 0.32), transparent 24rem),
+          radial-gradient(circle at 50% 95%, rgba(77, 245, 255, 0.18), transparent 30rem),
+          linear-gradient(145deg, #090413 0%, #160926 44%, #04030a 100%);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 42px 42px;
+        content: "";
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 82%);
+      }
+
+      body::after {
+        position: fixed;
+        inset: -20vmax;
+        z-index: -1;
+        background: conic-gradient(
+          from 180deg,
+          transparent,
+          rgba(255, 79, 216, 0.18),
+          transparent,
+          rgba(77, 245, 255, 0.16),
+          transparent
+        );
+        animation: orbit 24s linear infinite;
+        content: "";
+        filter: blur(48px);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 56px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 72px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .sigil {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(127, 92, 255, 0.7), rgba(255, 79, 216, 0.42));
+        box-shadow: 0 0 34px rgba(127, 92, 255, 0.55);
+        color: white;
+        font-family: Georgia, serif;
+        font-size: 1.45rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .pill,
+      .cta {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--ink);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        padding: 10px 14px;
+        text-decoration: none;
+        text-transform: uppercase;
+        backdrop-filter: blur(14px);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+        gap: 36px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 18px;
+        color: var(--cyan);
+        font-size: 0.8rem;
+        font-weight: 900;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 42px;
+        height: 1px;
+        background: currentColor;
+        content: "";
+      }
+
+      h1 {
+        max-width: 860px;
+        margin: 0;
+        font-size: clamp(4.25rem, 12vw, 10.5rem);
+        line-height: 0.82;
+        letter-spacing: -0.08em;
+        text-transform: uppercase;
+      }
+
+      .gradient-text {
+        background: linear-gradient(90deg, var(--ink), var(--cyan), var(--magenta));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: none;
+      }
+
+      .lead {
+        max-width: 680px;
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.35rem);
+        line-height: 1.75;
+      }
+
+      .actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 34px;
+      }
+
+      .cta {
+        border-color: rgba(77, 245, 255, 0.42);
+        background: linear-gradient(135deg, rgba(77, 245, 255, 0.24), rgba(255, 79, 216, 0.22));
+        box-shadow: 0 16px 48px rgba(77, 245, 255, 0.14);
+      }
+
+      .orb-card {
+        position: relative;
+        min-height: 560px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 36px;
+        overflow: hidden;
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04)),
+          rgba(9, 4, 19, 0.76);
+        box-shadow: 0 26px 90px rgba(0, 0, 0, 0.44);
+        backdrop-filter: blur(22px);
+      }
+
+      .orb-card::before {
+        position: absolute;
+        inset: 12%;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 9%),
+          repeating-conic-gradient(from 20deg, rgba(77, 245, 255, 0.2) 0 8deg, transparent 8deg 18deg);
+        animation: pulse 6s ease-in-out infinite;
+        content: "";
+        filter: drop-shadow(0 0 36px rgba(77, 245, 255, 0.3));
+      }
+
+      .orb-card::after {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(transparent 0 48%, rgba(255, 255, 255, 0.08) 50%, transparent 52% 100%),
+          radial-gradient(circle at 50% 50%, transparent 0 28%, rgba(255, 79, 216, 0.22) 29%, transparent 31%),
+          radial-gradient(circle at 50% 50%, transparent 0 42%, rgba(127, 92, 255, 0.24) 43%, transparent 45%);
+        content: "";
+        mix-blend-mode: screen;
+      }
+
+      .frequency {
+        position: absolute;
+        right: 28px;
+        bottom: 26px;
+        left: 28px;
+        z-index: 1;
+        display: grid;
+        gap: 12px;
+      }
+
+      .track {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.28);
+        padding: 16px 18px;
+      }
+
+      .track strong {
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .bars {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 4px;
+        height: 30px;
+      }
+
+      .bars span {
+        display: block;
+        width: 5px;
+        border-radius: 999px;
+        background: linear-gradient(var(--cyan), var(--magenta));
+        animation: equalize 1.2s ease-in-out infinite;
+      }
+
+      .bars span:nth-child(1) { height: 35%; animation-delay: 0s; }
+      .bars span:nth-child(2) { height: 80%; animation-delay: 0.15s; }
+      .bars span:nth-child(3) { height: 55%; animation-delay: 0.3s; }
+      .bars span:nth-child(4) { height: 100%; animation-delay: 0.45s; }
+      .bars span:nth-child(5) { height: 48%; animation-delay: 0.6s; }
+
+      .manifesto {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 46px;
+      }
+
+      .manifesto article {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.07);
+        padding: 24px;
+        backdrop-filter: blur(16px);
+      }
+
+      .manifesto h2 {
+        margin: 0 0 12px;
+        color: var(--amber);
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .manifesto p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .note {
+        margin-top: 28px;
+        color: rgba(248, 243, 231, 0.58);
+        font-size: 0.86rem;
+        line-height: 1.6;
+      }
+
+      @keyframes orbit {
+        to { transform: rotate(1turn); }
+      }
+
+      @keyframes pulse {
+        50% { transform: scale(1.06) rotate(8deg); }
+      }
+
+      @keyframes equalize {
+        50% { transform: scaleY(0.42); }
+      }
+
+      @media (max-width: 840px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          margin-bottom: 44px;
+        }
+
+        .hero,
+        .manifesto {
+          grid-template-columns: 1fr;
+        }
+
+        .orb-card {
+          min-height: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <nav class="nav" aria-label="Mythos Navigation">
+        <a class="brand" href="home.html"><span class="sigil">π</span> DJ Jesse Jay</a>
+        <div class="nav-links">
+          <a class="pill" href="home.html">Home</a>
+          <a class="pill" href="https://soundcloud.com/jessejay" rel="noopener" target="_blank">SoundCloud</a>
+          <a class="pill" href="contact.php">Kontakt</a>
+        </div>
+      </nav>
+
+      <section class="hero" aria-labelledby="mythos-title">
+        <div>
+          <p class="eyebrow">Anthropic Mythos Vibe · Zürich Frequenz</p>
+          <h1 id="mythos-title">Mythos <span class="gradient-text">π</span></h1>
+          <p class="lead">
+            Eine imaginäre, neonhelle Hommage an den Mythos von Anthropic: nicht als offizielles
+            Produkt, sondern als Club-Vision für Jesse Jays progressive Musikattacke — tief,
+            agentisch, zärtlich und mit mathematischem Herzschlag.
+          </p>
+          <div class="actions">
+            <a class="cta" href="https://soundcloud.com/jessejay/sets/djjessejay" rel="noopener" target="_blank">
+              Reise starten
+            </a>
+            <a class="pill" href="music.php">Archiv öffnen</a>
+          </div>
+        </div>
+
+        <aside class="orb-card" aria-label="Mythos Frequenz Visual">
+          <div class="frequency">
+            <div class="track">
+              <strong>π Signal</strong>
+              <span class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+            </div>
+            <div class="track">
+              <strong>Progressive Orbit</strong>
+              <span>1997 → ∞</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="manifesto" aria-label="Mythos Manifest">
+        <article>
+          <h2>Mythos</h2>
+          <p>
+            Ein Narrativ aus Licht, Bass und Maschinenpoesie: jeder Track wird zur Geschichte,
+            jeder Übergang zum Portal.
+          </p>
+        </article>
+        <article>
+          <h2>Anthropic</h2>
+          <p>
+            Inspiriert von frontier AI, aber bewusst sicher und künstlerisch: kein Exploit, nur
+            Energie, Resonanz und Club-Fantasie.
+          </p>
+        </article>
+        <article>
+          <h2>π</h2>
+          <p>
+            Kreis ohne Ende, Groove ohne Grenze — Zürich dreht sich weiter, bis Herz und Frequenz
+            eins werden.
+          </p>
+        </article>
+      </section>
+
+      <p class="note">
+        Hinweis: Diese Seite ist eine freie, künstlerische Vibe-Code-Interpretation und steht in
+        keiner Verbindung zu Anthropic oder Claude Mythos.
+      </p>
+    </main>
+  </body>
+</html>
